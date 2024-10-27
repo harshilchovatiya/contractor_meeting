@@ -59,7 +59,7 @@
 
     <script>
         async function fetchUserDetails() {
-            const memberId = document.getElementById('input-id').value;
+            const phone_number = document.getElementById('input-id').value;
             document.getElementById('error').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
             document.getElementById('card-id-input').style.display = 'none';
@@ -70,7 +70,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ member_id: memberId })
+                    body: JSON.stringify({ phone_number: phone_number })
                 });
 
                 if (!response.ok) throw new Error('Failed to fetch user details');
