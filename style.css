@@ -202,5 +202,17 @@ footer {
     padding: 10px;
     border-radius: 0 0 20px 20px;
     width: 100%;
-    /* Ensure footer takes full width */
+}
+
+.guide-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.guide-link .guide-text {
+    color: #3b3b98;
+    text-decoration: underline;
+    font-size: 16px;
 }
