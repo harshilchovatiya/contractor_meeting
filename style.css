@@ -181,6 +181,7 @@ body {
     width: 200px;
     height: 200px;
     margin-top: 8px;
+    border-radius: 10%;
 }
 
 .card .input-field {
