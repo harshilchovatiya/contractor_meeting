@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instant Meeting Attendance: Generate Your QR Code!</title>
-    <meta name="description" content="Join meetings hassle-free! Enter your member ID to get your profile and download your unique QR code for seamless attendance.">
+    <meta name="description"
+        content="Join meetings hassle-free! Enter your member ID to get your profile and download your unique QR code for seamless attendance.">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="512x512" href="favicon_io/android-chrome-512x512.png">
     <link rel="icon" type="image/png" sizes="192x192" href="favicon_io/android-chrome-192x192.png">
@@ -14,7 +15,7 @@
     <link rel="manifest" href="favicon_io/site.webmanifest">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
-   <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -23,10 +24,10 @@
             <a href="user_guide.html" class="guide-text">User Guide</a>
         </p>
     </div>
-    
+
     <div class="content">
         <span class="loader" id="loader"></span>
-        
+
         <div class="card" id="card-id-input">
             <h2>Enter Your Mobile Number</h2>
             <input class="input-field" id="input-id" type="text" placeholder="Enter your Mobile Number" />
@@ -73,9 +74,29 @@
                     body: JSON.stringify({ phone_number: phone_number })
                 });
 
-                if (!response.ok) throw new Error('Failed to fetch user details');
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    // Handle specific message returned by the backend
+                    if (errorData.message) {
+                        document.getElementById('error').innerText = errorData.message; // Show custom message from the backend
+                    } else {
+                        document.getElementById('error').innerText = errorData.error || 'Failed to fetch user details';
+                    }
+                    document.getElementById('error').style.display = 'block';
+                    document.getElementById('card-id-input').style.display = 'block';
+                    return;
+                }
 
                 const data = await response.json();
+                console.log(data);
+                // Check if the message is "Pay Fee first"
+                if (data.message === 'Pay Fee first') {
+                    document.getElementById('error').innerText = 'Please pay the fee first.';
+                    document.getElementById('error').style.display = 'block';
+                    document.getElementById('card-id-input').style.display = 'block';
+                    document.getElementById('loader').style.display = 'none'; // Hide the loader
+                    return;
+                }
 
                 // Populate the profile card
                 const userName = data.user.name;
@@ -105,7 +126,8 @@
                 document.body.classList.add('custom-height');
             } catch (error) {
                 console.error('Error:', error);
-                document.getElementById('error').innerText = 'User not found or an error occurred';
+                document.getElementById('error').innerText = error.message || 'An unexpected error occurred';
+                // Show the error message and the ID input card again
                 document.getElementById('error').style.display = 'block';
                 document.getElementById('card-id-input').style.display = 'block';
             } finally {
