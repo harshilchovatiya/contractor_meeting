@@ -6,7 +6,7 @@ body {
     margin: 0;
     background-color: #e0d4f7;
     font-family: 'Nunito', sans-serif;
-    height: 98vh;
+    /* height: 98vh; */
     padding-top: 40px;
     position: relative;
     /* Ensure body takes full height */
@@ -23,6 +23,29 @@ body {
         height: 145vh;
         min-height: 145vh;
     }
+}
+
+/* Header */
+header {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 20px;
+}
+
+header img {
+    height: 180px;
+    scale: 2.5;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+header h1 {
+    font-size: 18px;
+    color: #3b3b98;
+    margin: 0;
+    font-weight: 600;
 }
 
 .content {
@@ -205,6 +228,13 @@ footer {
     width: 100%;
 }
 
+/* Co-Powered By Section */
+footer p:last-child {
+    font-size: 12px;
+    color: gray;
+    margin: 5px 0 0;
+}
+
 .guide-link {
     position: absolute;
     top: 20px;
@@ -216,4 +246,21 @@ footer {
     color: #3b3b98;
     text-decoration: underline;
     font-size: 16px;
+}
+
+.banner-card {
+    width: 300px;
+    text-align: center;
+}
+
+.banner-image {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.banner-image:hover {
+    transform: scale(1.05);
 }

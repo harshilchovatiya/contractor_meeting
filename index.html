@@ -15,10 +15,14 @@
     <link rel="manifest" href="favicon_io/site.webmanifest">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <header style="text-align: center; padding: 10px;">
+        <img src="logo.png" alt="Brand Logo" style="height: 40px;">
+        <h1 style="font-size: 18px; margin: 5px 0;">Welcome to Residential Contractors Association Portal</h1>
+    </header>
     <div class="guide-link">
         <p>
             <a href="user_guide.html" class="guide-text">User Guide</a>
@@ -46,6 +50,13 @@
             <a class="button contact" id="phone_number" href="">+1234567890</a>
         </div>
 
+        <div class="banner-card" id="banner-card" style="display: none;">
+            <a href="https://dhansafar.com/#pricing" target="_blank">
+                <img class="banner-image" src="https://harshilchovatiya.github.io/dhansafarapp/vigyapan/ads-img/Ads-3.png" alt="Banner Image" />
+            </a>
+        </div>
+        
+
         <div class="card" id="card-2" style="display: none;">
             <h2>QR Code Card</h2>
             <a class="button" id="downloadButton" href="#" onclick="downloadQRCode()">Download Code</a>
@@ -55,7 +66,8 @@
     </div>
 
     <footer>
-        <p style="margin: 0;">&copy; 2024 Developed by Harshil Chovatiya</p>
+        <p style="margin: 0;">&copy; 2024 Developed by <a href="http://harshilchovatiya.github.io" target="_blank">Harshil Chovatiya</a></p>
+        <p style="font-size: 12px; color: gray;">Co-Powered by <strong><a href="http://dhansafar.com" target="_blank">DhanSafar</a></strong></p>
     </footer>
 
     <script>
@@ -88,7 +100,6 @@
                 }
 
                 const data = await response.json();
-                console.log(data);
                 // Check if the message is "Pay Fee first"
                 if (data.message === 'Pay Fee first') {
                     document.getElementById('error').innerText = 'Please pay the fee first.';
@@ -123,6 +134,7 @@
                 document.getElementById('card-id-input').style.display = 'none';
                 document.getElementById('card-1').style.display = 'block';
                 document.getElementById('card-2').style.display = 'block';
+                document.getElementById('banner-card').style.display = 'block';
                 document.body.classList.add('custom-height');
             } catch (error) {
                 console.error('Error:', error);
